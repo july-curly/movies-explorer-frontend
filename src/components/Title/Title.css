@@ -1,0 +1,12 @@
+.title {
+  max-width: 1140px;
+  margin: 0;
+  color: #000000;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  border-bottom: 1px solid rgba(0,0,0, 1);
+  padding-bottom: 23px;
+}

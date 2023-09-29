@@ -9,8 +9,8 @@ import Input from "../Input/Input";
 import useFormValidation from "../../utils/useFormValidation"
 
 function Login ({name}) {
-  const { values, errors, isValid, isInputValid, handleChange, setValue } = useFormValidation(); 
-
+  const { values, errors, handleChange, isValid } = useFormValidation();
+  
   return(
     <section className="login">
       <Link to="/">
@@ -24,9 +24,29 @@ function Login ({name}) {
         buttonText={'Войти'} 
         subtitle={'Ещё не зарегистрированы?'}
         path={"/signup"} 
-        linkText={' Регистрация'}>
-          <Input inputName={"email"} label={"E-mail"} type={"email"} placeholder={"Введите email"} name={name} tabIndex={1}/>
-          <Input inputName={"password"} label={"Пароль"} type={"password"} placeholder={"Введите пароль"} name={name} tabIndex={2}/>
+        linkText={' Регистрация'}
+        isValid={isValid}
+        className={'login__submit'}>
+          <Input 
+            inputName={"email"} 
+            label={"E-mail"} 
+            type={"email"} 
+            placeholder={"Введите email"} 
+            name={name} 
+            tabIndex={1}
+            onChange={handleChange}
+            value={values.email || ''}
+            error={errors.email}/>
+          <Input
+            inputName={"password"}  
+            label={"Пароль"} 
+            type={"password"} 
+            placeholder={"Введите пароль"} 
+            name={name} 
+            tabIndex={2}
+            onChange={handleChange}
+            value={values.password || ''}
+            error={errors.password}/>
         </Form> 
     </section>
   )

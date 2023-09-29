@@ -4,13 +4,13 @@ import "../../vendor/button.css"
 import "./Form.css"
 
 
-function Form ({ name, title, tabIndex, buttonType, buttonText, subtitle, path, linkText, children }) {
+function Form ({ name, title, tabIndex, buttonType, buttonText, subtitle, path, linkText, children, className }) {
   return(
     <>
       <h2 className="form__title">{title}</h2>
-      <form className="form" action="#" name={name} noValidate>
+      <form className="form" action="#" name={name} noValidate >
         {children}
-        <button className="form__submit button" tabIndex={tabIndex} type={buttonType}>{buttonText}</button>
+        <button className={`form__submit button ${className}`} tabIndex={tabIndex} type={buttonType}>{buttonText}</button>
       </form>
       <p className='form__subtitle'>{subtitle}<Link className='form__link link' to={path}>{linkText}</Link></p>
     </>

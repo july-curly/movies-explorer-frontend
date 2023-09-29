@@ -5,7 +5,7 @@ import Footer from "../Footer/Footer";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import "./Movies.css"
-import Preloader from "../Preloader/Preloader/Preloader";
+import Preloader from "../Preloader/Preloader";
 
 function Movies ({ cards }) {
   const [isLoading, setLoading] = useState(false);
@@ -17,9 +17,10 @@ function Movies ({ cards }) {
   return (
     <>
       <section className="movies">
-        <SearchForm onClick={handleSearch} />
+        <SearchForm handleSearch={handleSearch} />
         <FilterCheckbox />
-        {isLoading ? (<Preloader />) : (<MoviesCardList cards={cards}/>)}     
+        {isLoading ? (<Preloader />) : (<MoviesCardList cards={cards}/>)}   
+        <button className="movies__button">Еще</button>  
       </section>
       <Footer />
     </>

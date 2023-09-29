@@ -1,31 +1,29 @@
-// import { useEffect, useState } from 'react';
 import logo from '../../images/logo.svg';
 import { Link, useLocation } from "react-router-dom";
 import "./Header.css"
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "../../vendor/link.css"
 import Navigation from '../Navigation/Navigation';
 
 
-function Header({ isLoggedIn }) {
+function Header({ isLoggedIn, isOpen }) {
   const location = useLocation();
   
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // // const handleMenuToggle = () => {
-  // //   setIsMenuOpen(!isMenuOpen);
-  // // };
+  function isOpenHandle () {
+    isOpen();
+  }
 
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setIsMobile(window.innerWidth <= 768);
-  //   };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 900);
+    };
 
-  //   handleResize(); // Check initial width
-  //   window.addEventListener("resize", handleResize);
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
+    handleResize(); // Check initial width
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const logoElement = (
     <Link to="/">
@@ -44,18 +42,19 @@ function Header({ isLoggedIn }) {
     </div>
   );
 
+  const menuButton = (
+    <button 
+      className={`header__menu-btn ${location.pathname === "/" ? '' : 'header__menu-btn_black'}`} 
+      type="button" 
+      onClick={isOpenHandle}
+    />
+  )
+
   return (
     <header className={`header ${location.pathname === "/" ? 'header__theme-main' : 'header__theme-movies'}`}>
       {logoElement}
-      {isLoggedIn ? (
-        <Navigation /> 
-      )
-        :
-        (<>
-      
-        {notRegisteredLinks}
-        </>)
-      }
+      {isLoggedIn ? 
+        (isMobile ? (menuButton) : (<Navigation />)) : (notRegisteredLinks)}
     </header>
   )
 }

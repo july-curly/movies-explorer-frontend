@@ -5,7 +5,7 @@ import { useState } from "react"
 import useFormValidation from "../../utils/useFormValidation"
 
 function Profile ({ name, handleSignOut }) {
-  const { values, errors, isValid, isInputValid, handleChange, setValue } = useFormValidation()
+  const { values, errors, isValid, handleChange } = useFormValidation()
 
   const [isEditing, setIsEditing] = useState(false);
   
@@ -18,39 +18,41 @@ function Profile ({ name, handleSignOut }) {
     setIsEditing(false);
   };
 
-
   return (
     <section className="profile">
-      <h1 className="profile__title">Привет, Виталий!</h1>
-      <form className="profile__form" name={name} noValidate action="#" onSubmit={handleSave} >
+      <h2 className="profile__title">Привет, Виталий!</h2>
+      <form className="profile__form" name={name} noValidate action="#" onSubmit={handleSave}>
         <div className="profile__form_item">
           <label className="profile__name-input" htmlFor="name">Имя</label>
           <input 
-          className={`profile__input`}
-          type="text" 
-          id={`${name}__name`}
-          required
-          minLength="2"
-          maxLength="30"
-          name="name"
-          tabIndex={1}
-          onChange={handleChange}
-          // value={values.name || ''}
-          disabled={!isEditing}
-          placeholder="Введите имя" />
+            className={`profile__input`}
+            type="text" 
+            id={`${name}__name`}
+            required
+            minLength="2"
+            maxLength="30"
+            name="name"
+            tabIndex={1}
+            onChange={handleChange}
+            value={values.name || ''}
+            disabled={!isEditing}
+            placeholder="Введите имя"
+            error={errors.email} />
         </div>
         <div className="profile__form_item">
           <label className="profile__name-input" htmlFor="email">E-mail</label>
-          <input className="profile__input" 
+          <input 
+            className="profile__input" 
             type="email" 
             id={`${name}__email`}
             required
             name="email"
             tabIndex={2}
             onChange={handleChange}
-            // value={values.email || ''}
+            value={values.email || ''}
             disabled={!isEditing}
             placeholder="Введите email" 
+           
           />
         </div>
         <div className="profile__buttons">

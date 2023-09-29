@@ -56,8 +56,24 @@
 }
 
 .header__theme-movies {
-  background: #ffffff;
+  background-color: #ffffff;
 }
+
+.header__menu-btn {
+  width: 44px;
+  height: 44px;
+  background-image: url(../../images/icon-menu.svg);
+  background-color: transparent;
+  border: 0;
+  background-repeat: no-repeat;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.header__menu-btn_black {
+  background-image: url(../../images/icon-menu-black.svg);
+}
+  
 
 @media screen and (max-width: 780px) {
   .header {

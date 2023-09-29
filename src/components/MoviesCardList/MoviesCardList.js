@@ -7,16 +7,14 @@ function MoviesCardList( {cards} ) {
 
   return (
     <section className="movies-list">
-      {cards.map((card) => (
-        <MoviesCard
-          card={card}
-          key={card._id}
-        />
-      ))}
-       
-      <button className="movies-list__button">Еще</button>
-    
-      
+      <div className="movies-list__cards">
+        {cards.map((card) => (
+          <MoviesCard
+            card={card}
+            key={card._id}
+          />
+        ))}
+      </div>     
     </section>
   )
 }

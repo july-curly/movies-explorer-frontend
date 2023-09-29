@@ -6,6 +6,10 @@
   padding: 70px 442px;
 }
 
+.login__submit {
+  margin-top: 160px;
+}
+
 @media screen and (max-width: 1267px) {
   .login {
     padding: 232px calc(186px + (442 - 186) * ((100vw - 768px) / (1268 - 768)));
@@ -18,13 +22,9 @@
     justify-content: center;
     align-items: center;
   }
-}  
-.login__submit {
-  margin-top: 160px;
-}
 
-@media screen and (max-width: 665px) {
   .login__submit {
     margin-top: 248px;
   }
-}
+}  
+

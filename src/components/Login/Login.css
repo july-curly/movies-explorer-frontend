@@ -1,0 +1,30 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0 auto;
+  padding: 70px 442px;
+}
+
+.login__submit {
+  margin-top: 160px;
+}
+
+@media screen and (max-width: 1267px) {
+  .login {
+    padding: 232px calc(186px + (442 - 186) * ((100vw - 768px) / (1268 - 768)));
+  }
+}
+
+@media screen and (max-width: 665px) {
+  .login {
+    padding: 56px calc(30px + (186 - 30) * ((100vw - 320px) / (768 - 320)));
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login__submit {
+    margin-top: 248px;
+  }
+}  
+

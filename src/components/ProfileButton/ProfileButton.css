@@ -1,0 +1,14 @@
+.profile-button {
+  width: 100px;
+  height: 32px;
+  color: #000000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  border-radius: 20px;
+  background: #F9F9F9;
+  padding: 8px 20px;
+  margin-top: 21px;
+  box-sizing: border-box;
+}

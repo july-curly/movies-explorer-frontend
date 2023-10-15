@@ -139,7 +139,7 @@ function App() {
       .catch((error) => console.error(`Ошибка лайка ${error}`))
     }
   } 
-  
+  //меню
   function handleOpenMenu() {
     setIsMenuOpen(true);
   };

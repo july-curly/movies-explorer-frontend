@@ -13,6 +13,32 @@
   justify-content: center;
 }
 
+.movies-list__button {
+  margin: 80px 0 10px;
+  color: #000;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: 0;
+  border-radius: 6px;
+  background-color: #F9F9F9;
+  width: 100%;
+  padding: 11px 0 9px;
+}
+
+.movies-list__error {
+  text-align: center;
+  color: #000;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 50px 0;
+}
+
+
 
 @media screen and (max-width: 980px) {
   .movies-list__cards {

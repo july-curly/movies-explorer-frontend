@@ -8,8 +8,13 @@ import Form from "../Form/Form";
 import Input from "../Input/Input";
 import useFormValidation from "../../utils/useFormValidation"
 
-function Login ({name}) {
+function Login ({name, handleLogin, setIsError, isError}) {
   const { values, errors, handleChange, isValid } = useFormValidation();
+
+  function onLogin(evt) {
+    evt.preventDefault();
+    handleLogin(values.email, values.password)
+  }
   
   return(
     <section className="login">
@@ -20,13 +25,15 @@ function Login ({name}) {
         name={name} 
         title={'Рады видеть!'}   
         tabIndex={3} 
-        buttonType={'submit'} 
         buttonText={'Войти'} 
         subtitle={'Ещё не зарегистрированы?'}
         path={"/signup"} 
         linkText={' Регистрация'}
         isValid={isValid}
-        className={'login__submit'}>
+        className={'login__submit'}
+        onSubmit={onLogin}
+        setIsError={setIsError}
+        isError={isError}>
           <Input 
             inputName={"email"} 
             label={"E-mail"} 
@@ -34,9 +41,13 @@ function Login ({name}) {
             placeholder={"Введите email"} 
             name={name} 
             tabIndex={1}
-            onChange={handleChange}
+            onChange={(evt) => {
+              handleChange(evt);
+              setIsError(false);
+            }}
             value={values.email || ''}
-            error={errors.email}/>
+            error={errors.email}
+            pattern={'^\\S+@\\S+\\.\\S+$'}/>
           <Input
             inputName={"password"}  
             label={"Пароль"} 
@@ -44,9 +55,14 @@ function Login ({name}) {
             placeholder={"Введите пароль"} 
             name={name} 
             tabIndex={2}
-            onChange={handleChange}
+            onChange={(evt) => {
+              handleChange(evt);
+              setIsError(false);
+            }}
             value={values.password || ''}
-            error={errors.password}/>
+            error={errors.password}
+            minLength={3}
+            maxLength={30}/>
         </Form> 
     </section>
   )

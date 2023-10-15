@@ -20,7 +20,7 @@ function Header({ isLoggedIn, isOpen }) {
       setIsMobile(window.innerWidth <= 900);
     };
 
-    handleResize(); // Check initial width
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);

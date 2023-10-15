@@ -1,10 +1,9 @@
 import "../../vendor/logo.css"
 import "../../vendor/link.css"
 import "../../vendor/button.css"
-
 import "./Input.css"
 
-function Input ({ name, inputName, type, placeholder, label, tabIndex, onChange, value, error }) {
+function Input ({ name, inputName, type, placeholder, label, tabIndex, onChange, value, error, pattern, minLength, maxLength }) {
   
   return(
     <div className="inputs" >
@@ -20,8 +19,9 @@ function Input ({ name, inputName, type, placeholder, label, tabIndex, onChange,
         onChange={onChange}
         value={value}
         error={error}
-        minLength={inputName === 'name' ? 2 : undefined}
-        maxLength={inputName === 'name' ? 30 : undefined}
+        minLength={minLength || undefined}
+        maxLength={maxLength || undefined}
+        pattern={pattern || undefined}
       />
       <span id={`${name}-${inputName}-error`} className={`inputs__error inputs__error_type_${inputName}`}>{error}</span>
     </div>     

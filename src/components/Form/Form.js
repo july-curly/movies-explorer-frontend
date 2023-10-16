@@ -36,7 +36,7 @@ function Form ({
             className={`form__submit button ${className} ${!isValid || isError ? 'form__btn_disabled' : ''}`} 
             tabIndex={tabIndex} 
             type="submit"
-            disabled={!isValid || isError}>
+            disabled={!isValid || isError || isLoading}>
               {buttonText}
           </button>)}
       </form>

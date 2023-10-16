@@ -8,7 +8,7 @@ import Form from "../Form/Form";
 import Input from "../Input/Input";
 import useFormValidation from "../../utils/useFormValidation"
 
-function Login ({name, handleLogin, setIsError, isError}) {
+function Login ({name, handleLogin, setIsError, isError, isLoading}) {
   const { values, errors, handleChange, isValid } = useFormValidation();
 
   function onLogin(evt) {
@@ -47,7 +47,9 @@ function Login ({name, handleLogin, setIsError, isError}) {
             }}
             value={values.email || ''}
             error={errors.email}
-            pattern={'^\\S+@\\S+\\.\\S+$'}/>
+            pattern={'^\\S+@\\S+\\.\\S+$'}
+            isLoading={isLoading}
+            />
           <Input
             inputName={"password"}  
             label={"Пароль"} 
@@ -62,7 +64,8 @@ function Login ({name, handleLogin, setIsError, isError}) {
             value={values.password || ''}
             error={errors.password}
             minLength={3}
-            maxLength={30}/>
+            maxLength={30}
+            isLoading={isLoading}/>
         </Form> 
     </section>
   )

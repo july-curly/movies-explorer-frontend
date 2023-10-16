@@ -91,7 +91,7 @@ function MoviesCardList( {searchResults, saveMovies, isErrorServer, firstSearchQ
         <span className="movies-list__error">Ничего не найдено.</span>
         : <span className="movies-list__error">Начните поиск фильмов.</span>}
       </div>
-      {location.pathname === '/movies' && cards.length !== 0 ? <button className="movies-list__button" onClick={handleMoreCards}>Еще</button> : '' }  
+      {location.pathname === '/movies' && <button type='button' className={`movies-list__button ${count >= searchResults.length && 'movies-list__button_hidden'}`} onClick={handleMoreCards}>Еще</button>}  
     </section>
   )
 }

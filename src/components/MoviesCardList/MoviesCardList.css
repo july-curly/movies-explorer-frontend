@@ -26,6 +26,13 @@
   background-color: #F9F9F9;
   width: 100%;
   padding: 11px 0 9px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.movies-list__button_hidden{
+  opacity: 0;
+  visibility: hidden;
 }
 
 .movies-list__error {

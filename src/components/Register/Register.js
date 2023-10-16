@@ -52,6 +52,7 @@ function Register ({name, handleRegister, isLoading, setIsError, isError }) {
             // pattern={'/^[a-zA-Zа-яА-ЯёЁ\s-]+$/'}
             minLength={2}
             maxLength={30}
+            isLoading={isLoading}
           />
           <Input 
             inputName={"email"} 
@@ -68,6 +69,7 @@ function Register ({name, handleRegister, isLoading, setIsError, isError }) {
               handleChange(evt);
               setIsError(false);
             }}
+            isLoading={isLoading}
           />
           <Input 
             inputName={"password"} 
@@ -85,6 +87,7 @@ function Register ({name, handleRegister, isLoading, setIsError, isError }) {
               handleChange(evt);
               setIsError(false);
             }}
+            isLoading={isLoading}
           />
       </Form> 
     </section>

@@ -85,6 +85,12 @@ function App() {
           setSaveMovies(cards.reverse())
           setIsCheck(false)
           setIsLoggedIn(true)
+          if (
+            location.pathname === "/signin" ||
+            location.pathname === "/signup"
+          ) {
+            navigate("/movies");
+          }
         })
         .catch((error) => {
           console.error(`Ошибка загрузки данных ${error}`)
@@ -97,7 +103,7 @@ function App() {
         setIsLoggedIn(false)
         localStorage.clear()
     }
-  }, [isLoggedIn])
+  }, [isLoggedIn, location.pathname, navigate])
 
   // проверка токена
   useEffect(() => { 
@@ -203,13 +209,13 @@ function App() {
               isLoggedIn={isLoggedIn}
               setIsError={setIsError}
               saveMovies={saveMovies}
-              isError={isError}
               addCard={handleCardLike}/>}
             />
             <Route path="/saved-movies" element={<ProtectedRoute
               element={SavedMovies} 
               isLoggedIn={isLoggedIn}
               setIsError={setIsError}
+              isError={isError}
               saveMovies={saveMovies}
               onDelete={handleDelete}/>}
             />          

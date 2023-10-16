@@ -1,7 +1,7 @@
 import "./Profile.css"
 import "../../vendor/link.css"
 import "../../vendor/button.css"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import useFormValidation from "../../utils/useFormValidation"
 import CurrentUserContext from '../../context/CurrentUserContext';
 import Preloader from "../Preloader/Preloader"
@@ -9,11 +9,19 @@ import Preloader from "../Preloader/Preloader"
 function Profile ({ name, handleSignOut, isEditing, setIsEditing, isLoading,  isError, handleUpdateUser, isSuccess }) {
   const currentUser = useContext(CurrentUserContext)
   const { values, errors, isValid, handleChange, reset } = useFormValidation({name: currentUser.name, email: currentUser.email});
- 
- 
+  const [disableSubmit, setDisableSubmit] = useState(false);
+
   useEffect(() => {
       reset({ name: currentUser.name, email: currentUser.email });
   }, [currentUser, reset]);
+
+  useEffect(() => {
+    if(currentUser.name !== values.name || currentUser.email !== values.email) {
+      setDisableSubmit(true)
+    } else {
+      setDisableSubmit(false)
+    }
+  },[currentUser.name, currentUser.email,values.name, values.email])
    
   const handleEdit = () => {
     setIsEditing(true);
@@ -39,9 +47,12 @@ function Profile ({ name, handleSignOut, isEditing, setIsEditing, isLoading,  is
             maxLength="30"
             name="name"
             tabIndex={1}
-            onChange={handleChange}
+            onChange={(evt) => {
+              handleChange(evt);
+              setDisableSubmit(false);
+            }}
             value={values.name || ''}
-            disabled={!isEditing}
+            disabled={!isEditing || isLoading}
             placeholder="Введите имя"
             error={errors.name} />
         </div>
@@ -54,9 +65,12 @@ function Profile ({ name, handleSignOut, isEditing, setIsEditing, isLoading,  is
             required
             name="email"
             tabIndex={2}
-            onChange={handleChange}
+            onChange={(evt) => {
+              handleChange(evt);
+              setDisableSubmit(false);
+            }}
             value={values.email || ''}
-            disabled={!isEditing}
+            disabled={!isEditing || isLoading}
             placeholder="Введите email" 
             pattern={'^\\S+@\\S+\\.\\S+$'}
           />
@@ -68,10 +82,9 @@ function Profile ({ name, handleSignOut, isEditing, setIsEditing, isLoading,  is
               {isLoading ? (<Preloader/>) : (
               <button
                 tabIndex={3}
-                className={`profile__save button ${!isValid || isError ? 'profile__save_disabled' : ''}`}
+                className={`profile__save button ${!isValid || isError || !disableSubmit ? 'profile__save_disabled' : ''}`}
                 type="submit"
-                onClick={handleSave}
-                disabled={!isValid}>
+                disabled={!isValid || !disableSubmit}>
                 Сохранить
               </button>)}
             </>

@@ -6,8 +6,9 @@ import SearchForm from "../SearchForm/SearchForm";
 import "./Movies.css"
 import Preloader from "../Preloader/Preloader";
 import moviesApi from "../../utils/MoviesApi";
+import { ShortMovieDuration } from "../../utils/constants";
 
-function Movies ({ setIsError, saveMovies, addCard }) {
+function Movies ({ setIsError, saveMovies, addCard, isError }) {
   const [isLoading, setLoading] = useState(false);
   const [isMovies, setIsMovies] = useState([]);
   const [isShortFilm, setIsShortFilm] = useState(false);
@@ -23,7 +24,7 @@ function Movies ({ setIsError, saveMovies, addCard }) {
     setSearchQuery(search);
     setSearchResults(movies.filter((item) => {
       const nameMovie = item.nameRU.toLowerCase().includes(search.toLowerCase())
-      return isShortFilm ? (nameMovie && item.duration <= 40) : nameMovie;
+      return isShortFilm ? (nameMovie && item.duration <= ShortMovieDuration) : nameMovie;
     }))
   }, [])
 
@@ -75,7 +76,12 @@ function Movies ({ setIsError, saveMovies, addCard }) {
   return (
     <>
       <section className="movies">
-        <SearchForm handleSearch={searchMovies} setErrorServer={setErrorServer} searchQuery={searchQuery} isErrorServer={isErrorServer} setIsError={setIsError}/>
+        <SearchForm 
+          handleSearch={searchMovies} 
+          setErrorServer={setErrorServer} 
+          searchQuery={searchQuery}
+          isErrorServer={isErrorServer} 
+          setIsError={setIsError} />
         <FilterCheckbox isShortFilm={isShortFilm} handleFilterShortFilms={handleFilterShortFilms} />
         {isLoading ? 
           (<Preloader />) 

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../../vendor/button.css"
 
-function SearchForm ({ handleSearch, searchQuery, saveMovies, setIsError}) {
+function SearchForm ({ handleSearch, searchQuery, saveMovies, setIsError }) {
   const { values, errors, handleChange, reset } = useFormValidation(); 
   const location = useLocation();
 
@@ -47,9 +47,14 @@ function SearchForm ({ handleSearch, searchQuery, saveMovies, setIsError}) {
         <button type="submit" className="search-form__button button">
           <img className="search-form__img" src={iconFind} alt="Кнопка поиска"/>
         </button>
+        
+       
       </form>
+      <span className={`search-form__error ${errors.search && 'search-form__error_active'}`}>Нужно ввести ключевое слово</span>
     </section>
   )
 }
 
 export default SearchForm;
+
+//Нужно ввести ключевое слово

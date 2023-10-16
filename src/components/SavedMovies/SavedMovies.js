@@ -5,6 +5,7 @@ import "./SavedMovies.css"
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { useCallback } from "react";
+import { ShortMovieDuration } from "../../utils/constants";
 
 function SavedMovies ({ saveMovies, onDelete, setIsError }) {
   const [searchResults, setSearchResults] = useState(saveMovies);
@@ -15,7 +16,7 @@ function SavedMovies ({ saveMovies, onDelete, setIsError }) {
   const filterMovies = useCallback((search, isShortFilm, movies) => {
     setSearchResults(movies.filter((item) => {
       const nameMovie = item.nameRU.toLowerCase().includes(search.toLowerCase())
-      return isShortFilm ? (nameMovie && item.duration <= 40) : nameMovie;
+      return isShortFilm ? (nameMovie && item.duration <= ShortMovieDuration) : nameMovie;
     }))
     setSearchQuery(search);
   }, [])

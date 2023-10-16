@@ -8,7 +8,7 @@ export const LargePageCardCountNext = 3;
 export const MediumPageCardCount = 8;
 export const MediumPageCardCountNext = 2;
 export const SmallPageCardCount = 5;
-
+export const ShortMovieDuration = 40;
 
 
 

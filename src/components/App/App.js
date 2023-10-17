@@ -29,7 +29,7 @@ function App() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  // вход в профиль
+   // вход в профиль
   function handleLogin(email, password) {
     setLoading(true)
     mainApi.authorize(email, password)

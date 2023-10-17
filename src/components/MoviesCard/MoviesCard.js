@@ -6,9 +6,15 @@ import { useEffect, useState } from "react";
 function MoviesCard({ card, saveMovies, addCard, onDelete}) {
   const location = useLocation();
   const[isSave, setIsSave] = useState(false)
+
+  useEffect(() => {
+    if (location.pathname === '/movies') {
+      setIsSave(saveMovies.some(item => card.id === item.movieId))
+    }
+  }, [location.pathname, saveMovies, card.id, setIsSave])
   
   function handleSaveClick () {
-    if (saveMovies.some(item => card.id === item.moviedId)) {
+    if (saveMovies.some(item => card.id === item.movieId)) {
       setIsSave(true);
       addCard(card);
     } else {
@@ -16,12 +22,6 @@ function MoviesCard({ card, saveMovies, addCard, onDelete}) {
       addCard(card);
     }
   }
-
-  useEffect(() => {
-    if (location.pathname === '/movies') {
-      setIsSave(saveMovies.some(item => card.id === item.movieId))
-    }
-  }, [location.pathname, saveMovies, card.id, setIsSave ])
 
   function formatMovieDuration(mins) {
     return `${Math.floor(mins / 60)}ч ${mins % 60}м`;

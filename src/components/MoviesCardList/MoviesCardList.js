@@ -82,6 +82,7 @@ function MoviesCardList( {searchResults, saveMovies, isErrorServer, firstSearchQ
             card={card}
             key={card._id}
             onDelete={onDelete}
+            saveMovies={saveMovies}
           />)
         }) : isErrorServer ? 
         <span className="movies-list__error">

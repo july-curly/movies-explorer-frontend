@@ -1,17 +1,23 @@
 .search-form {
   font-family: 'Inter', Arial, sans-serif;
   margin: 0 auto;
-  padding: 60px 76px 41px 70px ; 
+  padding: 60px 0 41px 0 ; 
 }
 
 .search-form__form {
+  display: flex;
   max-width: 1140px;
+  flex-direction: column;
+}
+.search-form__inputs {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 0;
   background: #F9F9F9;
   border-radius: 40px;
   height: 46px;
+  flex-direction: row;
 }
 
 .search-form__input {
@@ -38,6 +44,11 @@
   background: #FF6838;
   border: none;
   margin: 6px 0 ;
+}
+
+.search-form__button_disable {
+  background-color: #99989822;
+  cursor: default;
 }
 
 .search-form__img {

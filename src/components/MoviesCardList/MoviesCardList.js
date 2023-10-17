@@ -21,17 +21,17 @@ function MoviesCardList( {searchResults, saveMovies, isErrorServer, firstSearchQ
   const cards = searchResults.slice(0, count)
 
   function requantity() {
-    const quantity = { count: MaxPageCardCount, countNext: MaxPageCardCountNext }
+    const quantity = { counts: MaxPageCardCount, countNext: MaxPageCardCountNext }
     if(window.innerWidth < LargePage) {
-      quantity.count = LargePageCardCount
+      quantity.counts = LargePageCardCount
       quantity.countNext = LargePageCardCountNext
     } 
     if (window.innerWidth < MediumPage) {
-      quantity.count = MediumPageCardCount
+      quantity.counts = MediumPageCardCount
       quantity.countNext = MediumPageCardCountNext
     }
     if (window.innerWidth < SmallPage) {
-      quantity.count = SmallPageCardCount
+      quantity.counts = SmallPageCardCount
       quantity.countNext = MediumPageCardCountNext
     } 
     return quantity
@@ -43,20 +43,20 @@ function MoviesCardList( {searchResults, saveMovies, isErrorServer, firstSearchQ
 
   useEffect(() => {
     if(location.pathname === '/movies') {
-      setCount(requantity().count)
+      setCount(requantity().counts)
 
       function changeOfQuantity() {
         if(window.innerWidth >= LargePage){
-          setCount(requantity().count)
+          setCount(requantity().counts)
         }
         if(window.innerWidth < LargePage){
-          setCount(requantity().count)
+          setCount(requantity().counts)
         }
         if(window.innerWidth < MediumPage){
-          setCount(requantity().count)
+          setCount(requantity().counts)
         }
         if(window.innerWidth < SmallPage){
-          setCount(requantity().count)
+          setCount(requantity().counts)
         }
       }
       

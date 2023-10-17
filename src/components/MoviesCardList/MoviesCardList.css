@@ -30,7 +30,7 @@
   visibility: visible;
 }
 
-.movies-list__button_hidden{
+.movies-list__button_hidden {
   opacity: 0;
   visibility: hidden;
 }

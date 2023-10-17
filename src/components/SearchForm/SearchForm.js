@@ -30,27 +30,28 @@ function SearchForm ({ handleSearch, searchQuery, saveMovies, setIsError }) {
 
   return (
     <section className="search-form">
-      <form className="search-form__form" onSubmit={onSearch}>
-        <input
-          type="text"
-          placeholder="Фильм"
-          className="search-form__input"
-          required
-          error={errors.search}
-          name="search"
-          onChange={(evt) => {
-            handleChange(evt);
-            setIsError(false)
-          }}
-          value={values.search || ''}
-        />
-        <button type="submit" className="search-form__button button">
-          <img className="search-form__img" src={iconFind} alt="Кнопка поиска"/>
-        </button>
-        
-       
+      <form className="search-form__form" onSubmit={onSearch} noValidate action="#" name='search'>
+        <div className="search-form__inputs" >
+          <input
+            type="text"
+            placeholder="Фильм"
+            className="search-form__input"
+            required
+            error={errors.search}
+            name="search"
+            onChange={(evt) => {
+              handleChange(evt);
+              setIsError(false)
+            }}
+            value={values.search || ''}
+          />
+          <button type="submit" disabled={values.search === "" ? true : false} className={`search-form__button button ${values.search === "" && 'search-form__button_disable'}`}>
+            <img className="search-form__img" src={iconFind} alt="Кнопка поиска"/>
+          </button>
+        </div>
+        <span className={`search-form__error ${errors.search && 'search-form__error_active'}`}>Нужно ввести ключевое слово</span>
       </form>
-      <span className={`search-form__error ${errors.search && 'search-form__error_active'}`}>Нужно ввести ключевое слово</span>
+      
     </section>
   )
 }

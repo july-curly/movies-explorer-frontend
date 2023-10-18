@@ -123,8 +123,8 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-  // baseUrl: 'https://api.july-diplom.nomoredomainsicu.ru',
-baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.july-diplom.nomoredomainsicu.ru',
+  // baseUrl: 'http://localhost:3000',
 });
 
  

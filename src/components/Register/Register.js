@@ -8,8 +8,13 @@ import Form from "../Form/Form";
 import Input from "../Input/Input";
 import useFormValidation from "../../utils/useFormValidation"
 
-function Register ({name}) {
+function Register ({name, handleRegister, isLoading, setIsError, isError }) {
   const { values, errors, isInputValid, handleChange, isValid } = useFormValidation();
+
+  function onRegister(evt) {
+    evt.preventDefault();
+    handleRegister(values.name, values.email, values.password)
+  }
 
   return(
     <section className="register">
@@ -20,12 +25,16 @@ function Register ({name}) {
         name={name} 
         title={'Добро пожаловать!'}   
         tabIndex={4} 
-        buttonType={'submit'} 
         buttonText={'Зарегистрироваться'} 
         subtitle={'Уже зарегистрированы?'}
         path={"/signin"} 
         linkText={' Войти'} 
-        isValid={isValid}>
+        isValid={isValid}
+        error={errors}
+        onSubmit={onRegister}
+        isLoading={isLoading}
+        setIsError={setIsError}
+        isError={isError}>
           <Input 
             inputName={"name"} 
             label={"Имя"} 
@@ -33,10 +42,18 @@ function Register ({name}) {
             placeholder={"Введите имя"} 
             name={name} 
             tabIndex={1}
-            onChange={handleChange}
+            onChange={(evt) => {
+              handleChange(evt);
+              setIsError(false);
+            }}
             value={values.name || ''}
             error={errors.name}
-            isInputValid={isInputValid}/>
+            isInputValid={isInputValid}
+            // pattern={'/^[a-zA-Zа-яА-ЯёЁ\s-]+$/'}
+            minLength={2}
+            maxLength={30}
+            isLoading={isLoading}
+          />
           <Input 
             inputName={"email"} 
             label={"E-mail"} 
@@ -44,10 +61,16 @@ function Register ({name}) {
             placeholder={"Введите email"} 
             name={name} 
             tabIndex={2}
-            onChange={handleChange}
             value={values.email || ''}
             error={errors.email}
-            isInputValid={isInputValid}/>
+            isInputValid={isInputValid}
+            pattern={'^\\S+@\\S+\\.\\S+$'}
+            onChange={(evt) => {
+              handleChange(evt);
+              setIsError(false);
+            }}
+            isLoading={isLoading}
+          />
           <Input 
             inputName={"password"} 
             label={"Пароль"} 
@@ -55,10 +78,17 @@ function Register ({name}) {
             placeholder={"Введите пароль"} 
             name={name} 
             tabIndex={3}
-            onChange={handleChange}
             value={values.password || ''}
             error={errors.password}
-            isInputValid={isInputValid}/>
+            isInputValid={isInputValid}
+            minLength={3}
+            maxLength={30}
+            onChange={(evt) => {
+              handleChange(evt);
+              setIsError(false);
+            }}
+            isLoading={isLoading}
+          />
       </Form> 
     </section>
   )

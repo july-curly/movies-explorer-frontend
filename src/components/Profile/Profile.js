@@ -1,26 +1,40 @@
 import "./Profile.css"
 import "../../vendor/link.css"
 import "../../vendor/button.css"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import useFormValidation from "../../utils/useFormValidation"
+import CurrentUserContext from '../../context/CurrentUserContext';
+import Preloader from "../Preloader/Preloader"
 
-function Profile ({ name, handleSignOut }) {
-  const { values, errors, isValid, handleChange } = useFormValidation()
+function Profile ({ name, handleSignOut, isEditing, setIsEditing, isLoading,  isError, handleUpdateUser, isSuccess }) {
+  const currentUser = useContext(CurrentUserContext)
+  const { values, errors, isValid, handleChange, reset } = useFormValidation({name: currentUser.name, email: currentUser.email});
+  const [disableSubmit, setDisableSubmit] = useState(false);
 
-  const [isEditing, setIsEditing] = useState(false);
-  
+  useEffect(() => {
+      reset({ name: currentUser.name, email: currentUser.email });
+  }, [currentUser, reset]);
+
+  useEffect(() => {
+    if(currentUser.name !== values.name || currentUser.email !== values.email) {
+      setDisableSubmit(true)
+    } else {
+      setDisableSubmit(false)
+    }
+  },[currentUser.name, currentUser.email,values.name, values.email])
+   
   const handleEdit = () => {
     setIsEditing(true);
   };
 
-  const handleSave = (e) => {
+  function handleSave (e) {
     e.preventDefault();
-    setIsEditing(false);
+    handleUpdateUser(values.name, values.email);
   };
 
   return (
     <section className="profile">
-      <h2 className="profile__title">Привет, Виталий!</h2>
+      <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
       <form className="profile__form" name={name} noValidate action="#" onSubmit={handleSave}>
         <div className="profile__form_item">
           <label className="profile__name-input" htmlFor="name">Имя</label>
@@ -33,11 +47,14 @@ function Profile ({ name, handleSignOut }) {
             maxLength="30"
             name="name"
             tabIndex={1}
-            onChange={handleChange}
+            onChange={(evt) => {
+              handleChange(evt);
+              setDisableSubmit(false);
+            }}
             value={values.name || ''}
-            disabled={!isEditing}
+            disabled={!isEditing || isLoading}
             placeholder="Введите имя"
-            error={errors.email} />
+            error={errors.name} />
         </div>
         <div className="profile__form_item">
           <label className="profile__name-input" htmlFor="email">E-mail</label>
@@ -48,28 +65,32 @@ function Profile ({ name, handleSignOut }) {
             required
             name="email"
             tabIndex={2}
-            onChange={handleChange}
+            onChange={(evt) => {
+              handleChange(evt);
+              setDisableSubmit(false);
+            }}
             value={values.email || ''}
-            disabled={!isEditing}
+            disabled={!isEditing || isLoading}
             placeholder="Введите email" 
-           
+            pattern={'^\\S+@\\S+\\.\\S+$'}
           />
         </div>
         <div className="profile__buttons">
           {isEditing ? (
             <>
-              <span id="profile-name-error" className="profile__error">При обновлении профиля произошла ошибка.</span>
+              <span id="profile-name-error" className={`profile__error ${isError ? 'profile__error_active' : ''}`}>При обновлении профиля произошла ошибка.</span>
+              {isLoading ? (<Preloader/>) : (
               <button
                 tabIndex={3}
-                className={`profile__save button ${!isValid ? '' : 'profile__save_disabled'}`}
+                className={`profile__save button ${!isValid || isError || !disableSubmit ? 'profile__save_disabled' : ''}`}
                 type="submit"
-                onClick={handleSave}
-                disabled={!isValid}>
+                disabled={!isValid || !disableSubmit}>
                 Сохранить
-              </button>
+              </button>)}
             </>
           ) : (
             <>
+              <span className={`profile__success ${isSuccess ? 'profile__success_active' : ''}`}>Аккаунт изменен.</span>
               <button
                 tabIndex={3}
                 className="profile__submit button"

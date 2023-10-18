@@ -29,12 +29,12 @@ export default function useFormValidation() {
     })
   }
 
-    function reset( data={} ) {
+    const reset = useCallback(( data={} ) => {
       setValues(data)
       setErrors({})
       setIsValid(false)
       setIsInputValid({})
-    }
+    },[])
 
    const setValue = useCallback((name, value) => {
       setValues((lastValue) => {

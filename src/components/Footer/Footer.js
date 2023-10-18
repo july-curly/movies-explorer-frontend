@@ -1,12 +1,8 @@
-import { useLocation } from "react-router-dom";
 import "./Footer.css"
 import "../../vendor/link.css"
 
 function Footer() {
-  const location = useLocation();
-
   return(
-    location.pathname === "/" || location.pathname === "/movies" || location.pathname === "/saved-movies" ? 
     <footer className="footer">
       <p className="footer__description">Учебный проект Яндекс.Практикум х BeatFilm.</p>
       <div className="footer__container">
@@ -21,8 +17,6 @@ function Footer() {
         </ul>
       </div>
     </footer>
-    :
-    <></>
   )
 } 
 

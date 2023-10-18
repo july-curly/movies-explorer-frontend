@@ -51,6 +51,28 @@
   line-height: normal;
 }
 
+.form__btn_disabled {
+  color: #C2C2C2;
+  background-color: #F8F8F8;
+  cursor: default;
+}
+
+.form__error {
+  opacity: 0;
+  visibility: hidden;
+  color: #FF004C;
+  text-align: center;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.form__error_active {
+  visibility: visible;
+  opacity: 1;
+}
+
 @media screen and (max-width: 665px) {
   .form__title {
     padding: 47px 0 80px;
